@@ -1,0 +1,101 @@
+.main{
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ToDoInput, .ToDoCreate{
+    margin: 10px;
+}
+
+.ToDoTools{
+    display: flex;
+}
+
+.ToDoInput{
+    outline: none;
+    border: 1px solid lightblue;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.ToDoCreate{
+    display: flex;
+    outline: none;
+    border: none;
+    padding: 15px;
+    border-radius: 50px;
+    background-color: lightgreen;
+}
+
+.ToDoList{
+    padding: 42px;
+    border: 1px solid lightblue;
+    border-radius: 20px;
+    min-width: 400px;
+}
+
+.ToDoContainer{
+    display: flex;
+    background-color: lightblue;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 300px;
+    margin: 10px 0px;
+}
+
+.ToDoContainer:hover .ToDoControls{
+    display: flex;
+}
+
+.ToDo{
+    min-width: 250px;
+}
+
+.ToDoEditInput{
+    outline: none;
+    border: 1px solid lightblue;
+    padding: 15px;
+    border-radius: 20px;
+    display: none;
+}
+
+.ToDoEditInput:focus{
+    display: flex;
+}
+
+.ToDoControls{
+    display: none;
+    align-items: center;
+}
+
+.ToDoComplete{
+    display: flex;
+    background-color: lightgreen;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 3px;
+}
+
+.ToDoEdit{
+    display: flex;
+    background-color: yellow;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 3px;
+}
+
+.ToDoDelete{
+    display: flex;
+    background-color: red;
+    outline: none;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 3px;
+}
