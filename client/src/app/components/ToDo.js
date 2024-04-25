@@ -1,15 +1,17 @@
 "use client"
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 export default function ToDoNode({styles, id, Complete, Edit, Delete, ToDo}) {
-    console.log(id + " :a: " + ToDo)
-    const [ToDoNote, ToDoNoteChange] = useState(ToDo)
-    console.log(id + " :b: " + ToDoNote)
-    const [ToDoNoteEditInput, ToDoNoteEditInputChange] = useState(ToDo)
-    console.log(id + " :c: " + ToDoNoteEditInput)
+    const [ToDoNote, ToDoNoteChange] = useState('')
+    const [ToDoNoteEditInput, ToDoNoteEditInputChange] = useState('')
 
     const ToDoNoteEditInputRef = useRef(null)
     const ToDoRef = useRef(null)
+
+    useEffect(()=>{
+        ToDoNoteChange(ToDo)
+        ToDoNoteEditInputChange(ToDo)
+    },[ToDo])
 
     function CompleteToDo(){
         Complete(id)
@@ -24,7 +26,7 @@ export default function ToDoNode({styles, id, Complete, Edit, Delete, ToDo}) {
         ToDoNoteEditInputRef.current.focus()
         ToDoRef.current.style.display = "none"
     }
-    function ToDoEditInputNodeChange(e){
+    function ToDoEditInputNodeChange(){
         ToDoNoteEditInputChange(ToDoNoteEditInputRef.current.value)
     }
     function ToDoEditInputKeyPress(e){
@@ -32,7 +34,7 @@ export default function ToDoNode({styles, id, Complete, Edit, Delete, ToDo}) {
             e.target.blur()
         }
     }
-    function ToDoEditInputFocus(){
+    function ToDoEditInputBlur(){
         ToDoNoteEditInputRef.current.style.display = "none"
         ToDoRef.current.style.display = "block"
         ToDoEditInputChange()
@@ -50,7 +52,7 @@ export default function ToDoNode({styles, id, Complete, Edit, Delete, ToDo}) {
     return (
         <div id={id} className={styles.ToDoContainer}>
             <p ref={ToDoRef} className={styles.ToDo}>{ToDoNote}</p>
-            <input ref={ToDoNoteEditInputRef} onChange={ToDoEditInputNodeChange} onKeyDown={ToDoEditInputKeyPress} onBlur={ToDoEditInputFocus} className={styles.ToDoEditInput} value={ToDoNoteEditInput}/>
+            <input ref={ToDoNoteEditInputRef} onChange={ToDoEditInputNodeChange} onKeyDown={ToDoEditInputKeyPress} onBlur={ToDoEditInputBlur} className={styles.ToDoEditInput} value={ToDoNoteEditInput}/>
             <div className={styles.ToDoControls}>
                 <button onClick={CompleteToDo} className={styles.ToDoComplete}><img src={"Complete.png"} /></button>
                 <button onClick={EditToDo} className={styles.ToDoEdit}><img src={"Edit.png"}/></button>
