@@ -46,7 +46,7 @@ export default function ToDoNode({styles, id, Complete, Edit, Delete, ToDo}) {
         }
         if(ToDoNoteEditInput != ToDoNote){
             ToDoNoteChange(ToDoNoteEditInput)
-            Edit(id)
+            Edit({id:id, newNote:ToDoNoteEditInput})
         }
     }
     return (

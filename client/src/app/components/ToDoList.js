@@ -28,6 +28,13 @@ const ToDoList = forwardRef(
             setDeleteToDo(nullToDo)
         },[DeleteToDo])
 
+        useEffect(()=>{
+            if(EditToDo != nullToDo){
+                ChangeToDoList([...ToDoList.slice(0,EditToDo.id),EditToDo.newNote , ...ToDoList.slice(EditToDo.id+1,ToDoList.length)])
+            }
+            setEditToDo(nullToDo)
+        },[EditToDo])
+
         function AddToDo(ToDo){
             setNewTodo(ToDo)
         }
@@ -38,8 +45,9 @@ const ToDoList = forwardRef(
         function completeToDo(id){
             setCompleteToDo(id)
         }
-        function editToDo(id){
-            setEditToDo(id)
+        function editToDo(ToDo){
+            console.log(ToDo)
+            setEditToDo(ToDo)
         }
 
         return (
