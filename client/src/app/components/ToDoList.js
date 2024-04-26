@@ -1,14 +1,16 @@
 "use client"
 import {forwardRef, useEffect, useImperativeHandle, useState} from "react";
 import ToDoNode from "@/app/components/ToDo";
+import CompletedToDoList from "@/app/components/CompletedToDoList.js";
 
 const ToDoList = forwardRef(
     function ToDoList(props, ref) {
         useImperativeHandle(ref, ()=>{
             return {AddToDo}
         })
-        const nullToDo = -1
         const [ToDoList, ChangeToDoList] = useState([])
+
+        const nullToDo = -1
         const [newToDo, setNewTodo] = useState('')
         const [DeleteToDo, setDeleteToDo] = useState(nullToDo)
         const [CompleteToDo, setCompleteToDo] = useState(nullToDo)
@@ -51,11 +53,18 @@ const ToDoList = forwardRef(
         }
 
         return (
-            <div className={props.styles.ToDoList}>
-                {ToDoList.map((e,i)=>{
-                    return <ToDoNode id={i} key={i} styles={props.styles} Complete={completeToDo} Delete={deleteToDo} Edit={editToDo} ToDo={e}/>
-                })}
-            </div>
+            <>
+                <div className={props.styles.ToDoList}>
+                    {
+                        ToDoList.length == 0 ? <p className={props.styles.noToDo}>No ToDo</p> :
+                            ToDoList.map((e,i)=>{
+                                return <ToDoNode id={i} key={i} styles={props.styles} Complete={completeToDo} Delete={deleteToDo} Edit={editToDo} ToDo={e}/>
+                            })
+                    }
+
+                </div>
+                <CompletedToDoList styles={props.styles} ToDos={[]}/>
+            </>
         );
     }
 )

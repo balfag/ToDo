@@ -36,6 +36,27 @@
     min-width: 400px;
 }
 
+.noToDo{
+    text-align: center;
+}
+
+.CompletedToDoControl{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 450px;
+}
+
+.CompletedToDoOCB{
+    border: none;
+    background-color: white;
+}
+
+.CompletedToDoList{
+    display: none;
+}
+
 .ToDoContainer{
     display: flex;
     background-color: lightblue;
