@@ -8,6 +8,7 @@ export default function ToDoTools({styles, Add}) {
 
     function AddButtonClick(){
         Add(ToDoInput)
+        ToDoInputChange('')
     }
 
     function ToDoInputNodeChange(e){
@@ -16,7 +17,7 @@ export default function ToDoTools({styles, Add}) {
 
     return (
         <div className={styles.ToDoTools}>
-            <input onChange={ToDoInputNodeChange} className={styles.ToDoInput}/>
+            <input onChange={ToDoInputNodeChange} className={styles.ToDoInput} value={ToDoInput}/>
             <button onClick={AddButtonClick} className={styles.ToDoCreate}><img src={"Add.png"}/></button>
         </div>
     );
