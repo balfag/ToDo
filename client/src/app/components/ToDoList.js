@@ -7,8 +7,11 @@ const ToDoList = forwardRef(
         useImperativeHandle(ref, ()=>{
             return {AddToDo}
         })
+
+        const [ToDoList, setToDoList] = useState([])
+        const [CompletedToDoList, setCompletedToDoList] = useState([])
+
         const nullToDo = -1
-        const [ToDoList, ChangeToDoList] = useState([])
         const [newToDo, setNewTodo] = useState('')
         const [DeleteToDo, setDeleteToDo] = useState(nullToDo)
         const [CompleteToDo, setCompleteToDo] = useState(nullToDo)
@@ -16,37 +19,44 @@ const ToDoList = forwardRef(
 
         useEffect(()=>{
             if(newToDo != ''){
-                ChangeToDoList([newToDo, ...ToDoList])
+                setToDoList([newToDo, ...ToDoList])
             }
             setNewTodo('')
         },[newToDo])
 
         useEffect(()=>{
             if(DeleteToDo != nullToDo){
-                ChangeToDoList([...ToDoList.slice(0,DeleteToDo), ...ToDoList.slice(DeleteToDo+1,ToDoList.length)])
+                setToDoList([...ToDoList.slice(0,DeleteToDo), ...ToDoList.slice(DeleteToDo+1,ToDoList.length)])
             }
             setDeleteToDo(nullToDo)
         },[DeleteToDo])
 
         useEffect(()=>{
             if(EditToDo != nullToDo){
-                ChangeToDoList([...ToDoList.slice(0,EditToDo.id),EditToDo.newNote , ...ToDoList.slice(EditToDo.id+1,ToDoList.length)])
+                setToDoList([...ToDoList.slice(0,EditToDo.id),EditToDo.newNote , ...ToDoList.slice(EditToDo.id+1,ToDoList.length)])
             }
             setEditToDo(nullToDo)
         },[EditToDo])
+
+        useEffect(()=>{
+            if(CompleteToDo != nullToDo){
+                const ToDo = ToDoList.slice(CompleteToDo, CompleteToDo + 1)
+                setToDoList([...ToDoList.slice(0,CompleteToDo), ...ToDoList.slice(CompleteToDo+1,ToDoList.length)])
+                setCompletedToDoList(ToDo)
+            }
+            setCompleteToDo(nullToDo)
+        },[CompleteToDo])
 
         function AddToDo(ToDo){
             setNewTodo(ToDo)
         }
         function deleteToDo(id){
             setDeleteToDo(id)
-            //ToDoList.slice(id - 1, 1)
         }
         function completeToDo(id){
             setCompleteToDo(id)
         }
         function editToDo(ToDo){
-            console.log(ToDo)
             setEditToDo(ToDo)
         }
 
