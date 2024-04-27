@@ -42,7 +42,7 @@ const ToDoList = forwardRef(
             if(CompleteToDo != nullToDo){
                 const ToDo = ToDoList.slice(CompleteToDo, CompleteToDo + 1)
                 setToDoList([...ToDoList.slice(0,CompleteToDo), ...ToDoList.slice(CompleteToDo+1,ToDoList.length)])
-                setCompletedToDoList(ToDo)
+                setCompletedToDoList(ToDo, ...CompletedToDoList)
             }
             setCompleteToDo(nullToDo)
         },[CompleteToDo])
