@@ -8,9 +8,8 @@ const ToDoList = forwardRef(
         useImperativeHandle(ref, ()=>{
             return {AddToDo}
         })
-        const [ToDoList, ChangeToDoList] = useState([])
         const [ToDoList, setToDoList] = useState([])
-        const [CompletedToDoList, setCompletedToDoList] = useState([])
+        const [completedToDoList, setCompletedToDoList] = useState([])
 
         const nullToDo = -1
         const [newToDo, setNewTodo] = useState('')
@@ -43,7 +42,7 @@ const ToDoList = forwardRef(
             if(CompleteToDo != nullToDo){
                 const ToDo = ToDoList.slice(CompleteToDo, CompleteToDo + 1)
                 setToDoList([...ToDoList.slice(0,CompleteToDo), ...ToDoList.slice(CompleteToDo+1,ToDoList.length)])
-                setCompletedToDoList(ToDo, ...CompletedToDoList)
+                setCompletedToDoList([ToDo, ...completedToDoList])
             }
             setCompleteToDo(nullToDo)
         },[CompleteToDo])
@@ -72,7 +71,7 @@ const ToDoList = forwardRef(
                     }
 
                 </div>
-                <CompletedToDoList styles={props.styles} ToDos={[]}/>
+                <CompletedToDoList styles={props.styles} ToDos={completedToDoList}/>
             </>
         );
     }
